@@ -8,20 +8,23 @@ import * as tf from "@tensorflow/tfjs";
 import "nes.css/css/nes.min.css";
 import FlexRow from "./components/FlexRow";
 import FlexColumn from "./components/FlexColumn";
+import GamingText from "./components/GamingText";
+import {getAppropriateText} from "./components/AppText";
 
 const model = tf.loadLayersModel("./model/model.json");
 const labels = require("./labels.json");
 let ref = React.createRef();
 
 ReactDOM.render(
-    <NesContainer title="Sketch" dark>
+    <NesContainer title="Sketch - round 10 of 10" dark>
         <FlexRow>
             <FlexColumn>
                 <Canvas ref={ref}/>
             </FlexColumn>
             <FlexColumn>
                 <FlexRow>
-                    gaming text
+                    <GamingText strings={[getAppropriateText("gameFailure")]}/>
+                    {/*<GamingText strings={['Some <i>strings</i> are slanted']}/>*/}
                 </FlexRow>
                 <FlexRow>
                     &nbsp;

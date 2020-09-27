@@ -7,7 +7,7 @@ class NesContainer extends React.Component {
         return <section
                 className={classNames(this.props.className, "nes-container", {
                     "with-title": this.props.title,
-                    "is-dark": this.props.dark,
+                    "is-dark": this.props.dark
                 })}
             >
                 {this.props.title && <h2 className="title">{this.props.title}</h2>}
