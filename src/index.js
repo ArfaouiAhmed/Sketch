@@ -15,8 +15,21 @@ const model = tf.loadLayersModel("./model/model.json");
 const labels = require("./labels.json");
 let ref = React.createRef();
 
+const homeBtnStyle = {
+    position: 'relative',
+    left: '850px',
+    top: '-20px'
+};
+
 ReactDOM.render(
     <NesContainer title="Sketch - round 10 of 10" dark>
+        <div>
+            <button type="button"
+                    style={homeBtnStyle}
+                    className="nes-btn">
+                Home
+            </button>
+        </div>
         <FlexRow>
             <FlexColumn>
                 <Canvas ref={ref}/>
