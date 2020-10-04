@@ -1,108 +1,55 @@
-import React, { useEffect, useState } from "react";
-import { getPrediction } from "./helpers.js";
+import React from "react";
+import NesContainer from "./components/NesContainer";
+import FlexRow from "./components/FlexRow";
+import FlexColumn from "./components/FlexColumn";
+import GamingText from "./components/GamingText";
+import {getAppropriateText} from "./components/AppText";
+import {Controls} from "./components/Controls";
+import * as tf from "@tensorflow/tfjs";
+import {Canvas} from "./components/Canvas";
 
 
-const clearBtnStyle = {
-    position: 'absolute',
-    left: '500px',
-    top: '300px'
+const model = tf.loadLayersModel("./model/model.json");
+const labels = require("./labels.json");
+let ref = React.createRef();
+
+const homeBtnStyle = {
+    position: 'relative',
+    left: '850px',
+    top: '-20px'
 };
 
-const predictBtnStyle = {
-    position: 'absolute',
-    left: '500px',
-    top: '250px'
-};
+function App() {
 
-function Controls({ theCanvas, model, labels }) {
-  let [prediction, setPrediction] = useState(""); // Sets default label to empty string.
-
-  useEffect(() => {
-    console.log(prediction);
-  });
-
-  return (
-      <div>
-        <button
-            style={clearBtnStyle}
-            class="nes-btn is-warning"
-            onClick={() => {
-              const canvas = theCanvas.current;
-              const ctx = canvas.getContext("2d");
-              ctx.fillRect(0, 0, canvas.height, canvas.width);
-            }}
-        >
-          Clear the canvas.
-        </button>
-        <button
-            class="nes-btn is-warning"
-            style={predictBtnStyle}
-            onClick={() =>
-                getPrediction(theCanvas, model).then(prediction =>
-                    setPrediction(labels[prediction[0]])
-                )
-            }
-        >
-          Predict the drawing.
-        </button>
-      </div>
-  );
+    return (
+        <NesContainer title="Sketch - round 10 of 10" dark>
+            <div>
+                <button type="button"
+                        style={homeBtnStyle}
+                        className="nes-btn">
+                    Home
+                </button>
+            </div>
+            <FlexRow>
+                <FlexColumn>
+                    <Canvas ref={ref}/>
+                </FlexColumn>
+                <FlexColumn>
+                    <FlexRow>
+                        <GamingText strings={[getAppropriateText("gameFailure")]}/>
+                        {/*<GamingText strings={['Some <i>strings</i> are slanted']}/>*/}
+                    </FlexRow>
+                    <FlexRow>
+                        &nbsp;
+                    </FlexRow>
+                    <FlexRow>
+                        <Controls theCanvas={ref} model={model} labels={labels}/>
+                    </FlexRow>
+                </FlexColumn>
+            </FlexRow>
+        </NesContainer>
+    );
 }
 
-const Canvas = React.forwardRef((props, ref) => {
-  let mouseDown = false;
-  let lastX;
-  let lastY;
 
-  function drawLine(canvas, x, y, lastX, lastY) {
-    let context = canvas.getContext("2d");
-
-    context.strokeStyle = "#000000";
-    context.lineWidth = 12;
-    context.lineJoin = "round";
-
-    context.beginPath();
-    context.moveTo(lastX, lastY);
-    context.lineTo(x, y);
-    context.closePath();
-    context.stroke();
-
-    return [x, y];
-  }
-
-  const handleMouseup = () => {
-    mouseDown = false;
-    [lastX, lastY] = [undefined, undefined];
-  };
-
-  const handleMousemove = e => {
-    const rect = e.target.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    if (mouseDown) {
-      [lastX, lastY] = drawLine(e.target, x, y, lastX, lastY);
-    }
-  };
-
-  useEffect(() => {
-    const canvas = ref.current;
-    const context = canvas.getContext("2d");
-
-    context.fillStyle = "#ffffff";
-    context.fillRect(0, 0, canvas.height, canvas.width);
-  });
-
-  return (
-      <canvas
-          height={300}
-          width={300}
-          ref={ref}
-          onMouseDown={() => (mouseDown = true)}
-          onMouseUp={handleMouseup}
-          onMouseMove={e => handleMousemove(e)}
-      />
-  );
-});
-
-export { Canvas, Controls };
+export default App;
