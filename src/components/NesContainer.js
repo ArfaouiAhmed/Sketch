@@ -9,6 +9,7 @@ class NesContainer extends React.Component {
                     "with-title": this.props.title,
                     "is-dark": this.props.dark
                 })}
+                style={this.props.style}
             >
                 {this.props.title && <h2 className="title">{this.props.title}</h2>}
                 {this.props.children}
