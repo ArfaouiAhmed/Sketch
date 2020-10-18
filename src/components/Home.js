@@ -4,6 +4,7 @@ import NesContainer from "./NesContainer";
 import {getAppropriateText} from "./AppText";
 import React from "react";
 import GamingText from "./GamingText";
+import { Link } from "@reach/router"
 
 const homeBtnStyle = {
     position: 'absolute',
@@ -36,10 +37,12 @@ function Home() {
                     <FlexRow>
                         &nbsp;
                     </FlexRow>
+                <Link to="/game">
                 <button type="button"
                         className="nes-btn">
                     Play game
                 </button>
+                </Link>
             </FlexColumn>
         </NesContainer>
     );

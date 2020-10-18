@@ -7,6 +7,7 @@ import GamingText from "./GamingText";
 import {getAppropriateText} from "./AppText";
 import {Controls} from "./Controls";
 import NesContainer from "./NesContainer";
+import {Link} from "@reach/router";
 
 
 const model = tf.loadLayersModel("./model/model.json");
@@ -28,17 +29,19 @@ function Round() {
 
     useEffect(() => {
         setDrawTarget(labels[currentRound]);
-    });
+    }, [currentRound]);
 
 
     return (
         <NesContainer title={"Sketch! - Round " + (currentRound) +  " of "+ labels.length} dark>
             <div>
-                <button type="button"
-                        style={homeBtnStyle}
-                        className="nes-btn">
-                    Home
-                </button>
+                <Link to="/">
+                    <button type="button"
+                            style={homeBtnStyle}
+                            className="nes-btn">
+                        Home
+                    </button>
+                </Link>
             </div>
             <FlexRow>
                 <FlexColumn>
