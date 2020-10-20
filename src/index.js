@@ -3,14 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import "nes.css/css/nes.min.css";
-import App from "./App";
+import {App} from "./App";
+import {Home} from "./components/Home";
+import {Router} from "@reach/router";
 
 
 
 ReactDOM.render(
-    <div>
-        <App/>
-    </div>,
+    <Router>
+        <Home path="/" />
+        <App path="game" />
+        {/*<Result path="result"/>*/}
+    </Router>,
     document.getElementById("root")
 );
 

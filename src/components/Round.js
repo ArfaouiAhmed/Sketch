@@ -1,5 +1,5 @@
 import * as tf from "@tensorflow/tfjs";
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
 import {Canvas} from "./Canvas";
@@ -8,6 +8,8 @@ import {getAppropriateText} from "./AppText";
 import {Controls} from "./Controls";
 import NesContainer from "./NesContainer";
 import {Link} from "@reach/router";
+import {GameContext} from "../App";
+
 
 
 const model = tf.loadLayersModel("./model/model.json");
@@ -19,12 +21,13 @@ const homeBtnStyle = {
     left: '850px',
     top: '-20px'
 };
-const RoundContext = React.createContext({});
+
 
 function Round() {
-    let [currentRound, setCurrentRound] = useState(1);
+
     let [drawTarget, setDrawTarget] = useState('');
 
+    const {currentRound, setCurrentRound} = useContext(GameContext);
 
 
     useEffect(() => {
@@ -33,34 +36,34 @@ function Round() {
 
 
     return (
-        <NesContainer title={"Sketch! - Round " + (currentRound) +  " of "+ labels.length} dark>
-            <div>
-                <Link to="/">
-                    <button type="button"
-                            style={homeBtnStyle}
-                            className="nes-btn">
-                        Home
-                    </button>
-                </Link>
-            </div>
-            <FlexRow>
-                <FlexColumn>
-                    <Canvas ref={ref}/>
-                </FlexColumn>
-                <FlexColumn>
-                    <FlexRow>
-                        <GamingText strings={[getAppropriateText("gameFailure", 20 , drawTarget)]}/>
-                        {/*<GamingText strings={['Some <i>strings</i> are slanted']}/>*/}
-                    </FlexRow>
-                    <FlexRow>
-                        &nbsp;
-                    </FlexRow>
-                    <FlexRow>
-                        <Controls theCanvas={ref} model={model} labels={labels} round={currentRound} nextRound={() => setCurrentRound(currentRound +1)}/>
-                    </FlexRow>
-                </FlexColumn>
-            </FlexRow>
-        </NesContainer>
+            <NesContainer title={"Sketch! - Round " + (currentRound) +  " of "+ labels.length} dark>
+                <div>
+                    <Link to="/">
+                        <button type="button"
+                                style={homeBtnStyle}
+                                className="nes-btn">
+                            Home
+                        </button>
+                    </Link>
+                </div>
+                <FlexRow>
+                    <FlexColumn>
+                        <Canvas ref={ref}/>
+                    </FlexColumn>
+                    <FlexColumn>
+                        <FlexRow>
+                            <GamingText strings={[getAppropriateText("gameFailure", 20 , drawTarget)]}/>
+                        </FlexRow>
+                        <FlexRow>
+                            &nbsp;
+                        </FlexRow>
+                        <FlexRow>
+                            <Controls theCanvas={ref} model={model} labels={labels} round={currentRound} nextRound={() => setCurrentRound(currentRound +1)}/>
+                        </FlexRow>
+                    </FlexColumn>
+                </FlexRow>
+            </NesContainer>
+
     );
 }
 

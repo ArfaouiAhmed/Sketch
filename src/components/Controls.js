@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {getPrediction} from "../helpers";
+import { navigate } from '@reach/router'
 
 
 const clearBtnStyle = {
@@ -28,6 +29,7 @@ function Controls({ theCanvas, model, labels, round, nextRound }) {
             setPrediction(labels[prediction[0]])
         )
         nextRound();
+        navigate('game')
     }
 
     return (

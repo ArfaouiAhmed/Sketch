@@ -6,23 +6,12 @@ import React from "react";
 import GamingText from "./GamingText";
 import { Link } from "@reach/router"
 
-const homeBtnStyle = {
-    position: 'absolute',
-    left: '850px',
-    top: '15px'
-};
-
-
-const resultContainer = {
-    // height: '160px'
-};
-
 
 function Home() {
 
 
     return (
-        <NesContainer style={resultContainer}  dark >
+        <NesContainer dark >
             <FlexColumn>
                 <h1>Sketch!</h1>
                     <FlexRow>

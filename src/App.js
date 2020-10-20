@@ -1,28 +1,26 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Round} from "./components/Round";
 import {Result} from "./components/Result";
-import {Home} from "./components/Home";
-import { Router, Link } from "@reach/router"
 
 
-
-
-
+const GameContext = React.createContext({currentRound: 0, setCurrentRound : null});
 
 
 function App() {
 
+    let [currentRound, setCurrentRound] = useState(1);
+
+    useEffect(() => {
+       console.log(currentRound)
+    });
+
+
     return (
-        <Router>
-            <Home path="/" />
-            <Round path="game" />
-            <Result path="result"/>
-        </Router>
-        // <Home/>
-        // <Round/>
-        // <Result/>
+        <GameContext.Provider value={{currentRound: currentRound, setCurrentRound: setCurrentRound} }>
+            {currentRound > 9 ? <Result/> : <Round/>}
+        </GameContext.Provider>
     );
 }
 
 
-export default App;
+export {App, GameContext};
