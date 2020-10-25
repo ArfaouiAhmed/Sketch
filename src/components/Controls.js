@@ -28,8 +28,9 @@ function Controls() {
         console.log("prediction: "+ prediction);
         if (seconds === 0) {
             predict();
+        }else{
+            return clearInterval(timer);
         }
-        return () => clearInterval(timer);
     }, [prediction, predict, seconds, timer, resetTimer]);
 
     function predict() {
@@ -59,10 +60,10 @@ function Controls() {
             <button
                 style={clearBtnStyle}
                 className="nes-btn is-warning"
+                id="clear"
                 onClick={() => {
                     const canvas = ref.current;
                     const ctx = canvas.getContext("2d");
-
                     ctx.fillRect(0, 0, canvas.height, canvas.width);
                 }}
             >
@@ -72,6 +73,7 @@ function Controls() {
                 className="nes-btn is-warning"
                 style={predictBtnStyle}
                 onClick={() => predict()}
+                id="predict"
             >
                 Predict the drawing.
             </button>
