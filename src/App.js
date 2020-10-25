@@ -1,22 +1,33 @@
 import React, {useEffect, useState} from "react";
 import {Round} from "./components/Round";
 import {Result} from "./components/Result";
+import * as tf from "@tensorflow/tfjs";
 
 
-const GameContext = React.createContext({currentRound: 0, setCurrentRound : null});
+const model = tf.loadLayersModel("./model/model.json");
+const labels = require("./labels.json");
+let ref = React.createRef();
 
+const GameContext = React.createContext();
 
 function App() {
 
-    let [currentRound, setCurrentRound] = useState(1);
+    const [currentRound, setCurrentRound] = useState(0);
 
-    useEffect(() => {
-       console.log(currentRound)
-    });
+
+    // useEffect(() => {
+    //     console.log("currentRound: " + currentRound);
+    // });
 
 
     return (
-        <GameContext.Provider value={{currentRound: currentRound, setCurrentRound: setCurrentRound} }>
+        <GameContext.Provider value={{
+            currentRound: currentRound,
+            setCurrentRound: setCurrentRound,
+            canvas: ref,
+            model: model,
+            labels: labels
+        }}>
             {currentRound > 9 ? <Result/> : <Round/>}
         </GameContext.Provider>
     );

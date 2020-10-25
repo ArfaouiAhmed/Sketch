@@ -1,4 +1,3 @@
-import * as tf from "@tensorflow/tfjs";
 import React, {useState, useEffect, useContext} from "react";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
@@ -12,9 +11,6 @@ import {GameContext} from "../App";
 
 
 
-const model = tf.loadLayersModel("./model/model.json");
-const labels = require(".././labels.json");
-let ref = React.createRef();
 
 const homeBtnStyle = {
     position: 'relative',
@@ -25,46 +21,50 @@ const homeBtnStyle = {
 
 function Round() {
 
-    let [drawTarget, setDrawTarget] = useState('');
-
-    const {currentRound, setCurrentRound} = useContext(GameContext);
+    const [drawTarget, setDrawTarget] = useState('');
+    const {currentRound, setCurrentRound, seconds, setSeconds, canvas, model, labels } = useContext(GameContext);
 
 
     useEffect(() => {
-        setDrawTarget(labels[currentRound]);
-    }, [currentRound]);
+     setDrawTarget(labels[currentRound]);
+    console.log("drawtarget: " + labels[currentRound])
+    },[currentRound, labels]);
 
 
-    return (
-            <NesContainer title={"Sketch! - Round " + (currentRound) +  " of "+ labels.length} dark>
-                <div>
-                    <Link to="/">
-                        <button type="button"
-                                style={homeBtnStyle}
-                                className="nes-btn">
-                            Home
-                        </button>
-                    </Link>
-                </div>
+return (
+    <NesContainer title={"Sketch! - Round " + (currentRound + 1) + " of " + labels.length} dark>
+        <div>
+            <Link to="/">
+                <button type="button"
+                        style={homeBtnStyle}
+                        className="nes-btn">
+                    Home
+                </button>
+            </Link>
+        </div>
+        <FlexRow>
+            <FlexColumn>
+                <Canvas ref={canvas}/>
+            </FlexColumn>
+            <FlexColumn>
                 <FlexRow>
-                    <FlexColumn>
-                        <Canvas ref={ref}/>
-                    </FlexColumn>
-                    <FlexColumn>
-                        <FlexRow>
-                            <GamingText strings={[getAppropriateText("gameFailure", 20 , drawTarget)]}/>
-                        </FlexRow>
-                        <FlexRow>
-                            &nbsp;
-                        </FlexRow>
-                        <FlexRow>
-                            <Controls theCanvas={ref} model={model} labels={labels} round={currentRound} nextRound={() => setCurrentRound(currentRound +1)}/>
-                        </FlexRow>
-                    </FlexColumn>
+                    <GamingText strings={[getAppropriateText("gameFailure")]}/>
                 </FlexRow>
-            </NesContainer>
+                <FlexRow>
 
-    );
+                </FlexRow>
+                <FlexRow>
+                    &nbsp;
+                </FlexRow>
+                <FlexRow>
+                    <Controls theCanvas={canvas} model={model} labels={labels} round={currentRound}
+                              nextRound={() => setCurrentRound(currentRound + 1)} seconds={seconds} setSeconds={setSeconds} drawTarget={drawTarget} />
+                </FlexRow>
+            </FlexColumn>
+        </FlexRow>
+    </NesContainer>
+
+);
 }
 
 export {Round};

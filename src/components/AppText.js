@@ -1,7 +1,7 @@
 
 
-export function getAppropriateText(gamestatus, seconds, target) {
-    let textElement = AppTexts.find(o => o.status === gamestatus);
+export function getAppropriateText(gameStatus) {
+    let textElement = AppTexts.find(o => o.status === gameStatus);
     if(textElement.text.length > 0){
         return textElement.text;
     }
@@ -10,15 +10,15 @@ export function getAppropriateText(gamestatus, seconds, target) {
 const AppTexts =[
     {
         status: "gameStart",
-        text: "let's get started. You have \nsecondsValue seconds to draw a roundValue \nin the box on the left."
+        text: "let's get started."
     },
     {
         status: "gameSuccess",
-        text: "You know, that was a damn \nfine sketch! You have \nsecondsValue seconds to draw a roundValue."
+        text: "You know, that was a damn \nfine sketch!"
     },
     {
         status: "gameFailure",
-        text: "Not good enough, but here's \nan other chance. You \nhave SecondsValue seconds to draw \na car."
+        text: "Not good enough, but here's \nan other chance."
     },
     {
         status: "gameEndSuccess",
