@@ -13,7 +13,6 @@ ReactDOM.render(
     <Router>
         <Home path="/" />
         <App path="game" />
-        {/*<Result path="result"/>*/}
     </Router>,
     document.getElementById("root")
 );

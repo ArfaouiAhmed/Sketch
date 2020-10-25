@@ -1,6 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {getPrediction} from "../helpers";
-import { navigate } from '@reach/router'
+import {navigate} from '@reach/router'
+import {GameContext} from "../App";
+import {useTimer} from "./Timer";
 
 
 const clearBtnStyle = {
@@ -16,45 +18,49 @@ const predictBtnStyle = {
 };
 
 
-
-function Controls({ theCanvas, model, labels, round, nextRound, drawTarget }) {
+function Controls() {
+    const {currentRound, setCurrentRound, score, dispatch, ref, model, labels} = useContext(GameContext);
     const [prediction, setPrediction] = useState(""); // Sets default label to empty string.
-    const [seconds, setSeconds] = useState(20);
+    const [timer, seconds, resetTimer] = useTimer();
 
-    const interval = setInterval(() => {
-        if (seconds === 0) {
-            clearInterval();
-        } else {
-            setSeconds(seconds - 1);
-        }
-    }, 1000);
 
     useEffect(() => {
-        // console.log("prediction: "+ prediction);
-        if(seconds === 0){
+        console.log("prediction: "+ prediction);
+        if (seconds === 0) {
             predict();
         }
-        return () => clearInterval(interval);
-    });
+        return () => clearInterval(timer);
+    }, [prediction, predict, seconds, timer, resetTimer]);
 
-    function predict(){
-        getPrediction(theCanvas, model).then(prediction =>
-            setPrediction(labels[prediction[0]])
+    function predict() {
+        getPrediction(ref, model).then(prediction => {
+                console.log("Predicting...");
+                setPrediction(labels[prediction[0]]);
+                if (labels[prediction[0]] === labels[currentRound]) {
+                    if (seconds < 10) {
+                        dispatch({type: "one"});
+                        console.log("+1");
+                    } else {
+                        dispatch({type: "two"});
+                        console.log("+2")
+                    }
+                }
+            }
         )
 
-        nextRound();
-        setSeconds(20);
-        navigate('game')
+        setCurrentRound(currentRound + 1);
+        resetTimer();
+        navigate('game');
     }
 
     return (
         <div>
-            you have {seconds} to draw {drawTarget}
+            you have {seconds} to draw {labels[currentRound]}
             <button
                 style={clearBtnStyle}
                 className="nes-btn is-warning"
                 onClick={() => {
-                    const canvas = theCanvas.current;
+                    const canvas = ref.current;
                     const ctx = canvas.getContext("2d");
 
                     ctx.fillRect(0, 0, canvas.height, canvas.width);
@@ -65,7 +71,7 @@ function Controls({ theCanvas, model, labels, round, nextRound, drawTarget }) {
             <button
                 className="nes-btn is-warning"
                 style={predictBtnStyle}
-                onClick={() =>predict()}
+                onClick={() => predict()}
             >
                 Predict the drawing.
             </button>
@@ -73,4 +79,4 @@ function Controls({ theCanvas, model, labels, round, nextRound, drawTarget }) {
     );
 }
 
-export { Controls };
+export {Controls};

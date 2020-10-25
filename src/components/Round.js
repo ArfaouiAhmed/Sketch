@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useContext} from "react";
+import React, { useEffect, useContext} from "react";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
 import {Canvas} from "./Canvas";
@@ -21,12 +21,10 @@ const homeBtnStyle = {
 
 function Round() {
 
-    const [drawTarget, setDrawTarget] = useState('');
-    const {currentRound, setCurrentRound, seconds, setSeconds, canvas, model, labels } = useContext(GameContext);
+    const {currentRound, ref, labels } = useContext(GameContext);
 
 
     useEffect(() => {
-     setDrawTarget(labels[currentRound]);
     console.log("drawtarget: " + labels[currentRound])
     },[currentRound, labels]);
 
@@ -44,7 +42,7 @@ return (
         </div>
         <FlexRow>
             <FlexColumn>
-                <Canvas ref={canvas}/>
+                <Canvas ref={ref}/>
             </FlexColumn>
             <FlexColumn>
                 <FlexRow>
@@ -57,8 +55,7 @@ return (
                     &nbsp;
                 </FlexRow>
                 <FlexRow>
-                    <Controls theCanvas={canvas} model={model} labels={labels} round={currentRound}
-                              nextRound={() => setCurrentRound(currentRound + 1)} seconds={seconds} setSeconds={setSeconds} drawTarget={drawTarget} />
+                    <Controls  />
                 </FlexRow>
             </FlexColumn>
         </FlexRow>

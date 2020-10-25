@@ -3,8 +3,9 @@ import FlexColumn from "./FlexColumn";
 import GamingText from "./GamingText";
 import NesContainer from "./NesContainer";
 import {getAppropriateText} from "./AppText";
-import React from "react";
+import React, {useContext} from "react";
 import { Link } from "@reach/router"
+import {GameContext} from "../App";
 
 const homeBtnStyle = {
     position: 'absolute',
@@ -24,12 +25,15 @@ const resultContainer = {
 
 
 function Result() {
+    const { score } = useContext(GameContext);
+
 
 
     return (
         <NesContainer style={resultContainer} title={"Sketch!"} dark >
             <FlexRow>
                 <FlexColumn>
+                    you scored : {score}
                     <GamingText strings={[getAppropriateText("gameEndFailure")]}/>
                 </FlexColumn>
                 <FlexColumn>
