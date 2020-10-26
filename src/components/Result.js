@@ -25,7 +25,7 @@ const resultContainer = {
 
 
 function Result() {
-    const { score } = useContext(GameContext);
+    const { setCurrentRound ,score ,dispatch} = useContext(GameContext);
 
 
 
@@ -51,7 +51,11 @@ function Result() {
                         <Link to="/game">
                             <button
                                 className="nes-btn is-warning"
-                                style={tryBtnStyle}>
+                                style={tryBtnStyle}
+                                onClick={() => {
+                                    setCurrentRound(0);
+                                    dispatch({type: "reset"});
+                                }}>
                                 Try Again.
                             </button>
                         </Link>

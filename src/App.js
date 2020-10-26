@@ -16,9 +16,6 @@ function App() {
     const [currentRound, setCurrentRound] = useState(0);
     const [score, dispatch] = useReducer(scoreReducer, 0);
 
-    useEffect(() => {
-        setCurrentRound(0);
-    }, []);
 
 
     return (

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 export function useTimer() {
     const [seconds, setSeconds] = useState(20);
