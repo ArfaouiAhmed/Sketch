@@ -26,7 +26,7 @@ const AppTexts =[
     },
     {
         status: "gameEndFailure",
-        text: "Womp,womp... Try harder next time,and\nmaybe you'll score more than just 2 points."
+        text: "Womp,womp... Try harder next time,and\nmaybe you'll score more"
     },
     {
         status: "welcome",

@@ -1,8 +1,9 @@
-import React, {useContext, useEffect, useState } from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {getPrediction} from "../helpers";
 import {navigate} from '@reach/router'
 import {GameContext} from "../App";
 import {useTimer} from "./Timer";
+import {RoundContext} from "./Round";
 
 
 const clearBtnStyle = {
@@ -21,10 +22,11 @@ const predictBtnStyle = {
 function Controls() {
     const {currentRound, setCurrentRound, score, dispatch, ref, model, labels} = useContext(GameContext);
     const [prediction, setPrediction] = useState(""); // Sets default label to empty string.
-    const [timer, seconds, resetTimer] = useTimer();
+    const { seconds, resetTimer} = useContext(RoundContext);
 
-    useEffect(() => { return () => clearInterval(timer);
-    });
+    // useEffect(() => {
+    //     return () => clearInterval(timer);
+    // });
 
 
     function predict() {
@@ -45,14 +47,14 @@ function Controls() {
 
         setCurrentRound(currentRound + 1);
         resetTimer();
-        navigate('game', { replace: true });
+        navigate('game', {replace: true});
     }
 
 
     return (
         <div>
             {seconds > 0 ? <div>
-                    you have {seconds} to draw {labels[currentRound]}
+
                     <button
                         style={clearBtnStyle}
                         className="nes-btn is-warning"

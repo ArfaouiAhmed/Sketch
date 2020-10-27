@@ -3,6 +3,7 @@ import {Round} from "./components/Round";
 import {Result} from "./components/Result";
 import * as tf from "@tensorflow/tfjs";
 import {scoreReducer} from "./components/Score";
+import {Game} from "./components/Game";
 
 
 const model = tf.loadLayersModel("./model/model.json");
@@ -28,7 +29,7 @@ function App() {
             model: model,
             labels: labels
         }}>
-            {currentRound > 9 ? <Result/> : <Round/>}
+            {currentRound > 9 ? <Result/> : <Game/>}
         </GameContext.Provider>
     );
 }
