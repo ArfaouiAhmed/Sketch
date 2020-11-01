@@ -4,7 +4,7 @@ import GamingText from "./GamingText";
 import NesContainer from "./NesContainer";
 import {getAppropriateText} from "./AppText";
 import React, {useContext} from "react";
-import { Link } from "@reach/router"
+import { Link } from "react-router-dom";
 import {GameContext} from "../App";
 
 const homeBtnStyle = {

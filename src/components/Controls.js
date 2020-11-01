@@ -1,6 +1,6 @@
 import React, {useContext, useState} from "react";
 import {getPrediction} from "../helpers";
-import {navigate} from '@reach/router'
+import {useHistory} from "react-router-dom";
 import {GameContext} from "../App";
 import {RoundContext} from "./Round";
 
@@ -22,6 +22,7 @@ function Controls() {
     const {currentRound, nextRound, score, dispatch, ref, model, labels} = useContext(GameContext);
     const [prediction, setPrediction] = useState(""); // Sets default label to empty string.
     const {seconds, resetTimer} = useContext(RoundContext);
+    const history = useHistory();
 
 
     function predict() {
@@ -42,7 +43,7 @@ function Controls() {
 
         nextRound();
         resetTimer();
-        navigate('game');
+        history.push("game");
     }
 
 

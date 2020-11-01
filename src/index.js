@@ -5,14 +5,23 @@ import * as serviceWorker from './serviceWorker';
 import "nes.css/css/nes.min.css";
 import {App} from "./App";
 import {Home} from "./components/Home";
-import {Router} from "@reach/router";
-
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
 
 ReactDOM.render(
-    <Router>
-        <Home path="/" />
-        <App path="game" />
+    <Router basename={process.env.PUBLIC_URL}>
+        <Switch>
+            <Route exact path="/">
+                <Home/>
+            </Route>
+            <Route path="/game">
+                <App/>
+            </Route>
+        </Switch>
     </Router>,
     document.getElementById("root")
 );

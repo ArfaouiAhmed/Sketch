@@ -1,4 +1,4 @@
-import {Link} from "@reach/router";
+import {Link} from "react-router-dom";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
 import {Canvas} from "./Canvas";
