@@ -6,19 +6,19 @@
     "runtime-main.js": "/Sketch/static/js/runtime-main.94b0dadb.js",
     "runtime-main.js.map": "/Sketch/static/js/runtime-main.94b0dadb.js.map",
     "static/css/2.87d4210f.chunk.css": "/Sketch/static/css/2.87d4210f.chunk.css",
-    "static/js/2.f55495f9.chunk.js": "/Sketch/static/js/2.f55495f9.chunk.js",
-    "static/js/2.f55495f9.chunk.js.map": "/Sketch/static/js/2.f55495f9.chunk.js.map",
+    "static/js/2.4f25ec39.chunk.js": "/Sketch/static/js/2.4f25ec39.chunk.js",
+    "static/js/2.4f25ec39.chunk.js.map": "/Sketch/static/js/2.4f25ec39.chunk.js.map",
     "index.html": "/Sketch/index.html",
-    "precache-manifest.5b9ec7cb1821ed9491f81175af99fc26.js": "/Sketch/precache-manifest.5b9ec7cb1821ed9491f81175af99fc26.js",
+    "precache-manifest.0f202d87a31e6cd6b7af94a09b7eed1f.js": "/Sketch/precache-manifest.0f202d87a31e6cd6b7af94a09b7eed1f.js",
     "service-worker.js": "/Sketch/service-worker.js",
     "static/css/2.87d4210f.chunk.css.map": "/Sketch/static/css/2.87d4210f.chunk.css.map",
     "static/css/main.5ecd60fb.chunk.css.map": "/Sketch/static/css/main.5ecd60fb.chunk.css.map",
-    "static/js/2.f55495f9.chunk.js.LICENSE.txt": "/Sketch/static/js/2.f55495f9.chunk.js.LICENSE.txt"
+    "static/js/2.4f25ec39.chunk.js.LICENSE.txt": "/Sketch/static/js/2.4f25ec39.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.94b0dadb.js",
     "static/css/2.87d4210f.chunk.css",
-    "static/js/2.f55495f9.chunk.js",
+    "static/js/2.4f25ec39.chunk.js",
     "static/css/main.5ecd60fb.chunk.css",
     "static/js/main.829e2076.chunk.js"
   ]
