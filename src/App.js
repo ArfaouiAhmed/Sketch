@@ -23,6 +23,7 @@ function App() {
     return (
         <GameContext.Provider value={{
             currentRound: currentRound,
+            setCurrentRound: setCurrentRound,
             nextRound: nextRound,
             resetRounds: resetRounds,
             score: score,

@@ -1,9 +1,23 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import {mount, shallow} from "enzyme";
+import {App} from "./App";
+import {Game} from "./components/Game";
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+
+describe("Test the <App /> component", () => {
+
+  const wrapper = shallow(<App />);
+
+
+  it("renders Game if currentRound is < 9 ", () => {
+    expect(wrapper.find('Game').exists()).toBeTruthy();
+  });
+
+  it("renders Result if currentRound is > 9 ", () => {
+    wrapper.setProps({ value: { currentRound: 10 } });
+    console.log(wrapper.props().value.currentRound);
+    expect(wrapper.find('Result').exists());
+
+  });
+
 });
