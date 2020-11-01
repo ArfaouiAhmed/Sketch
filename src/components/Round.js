@@ -10,7 +10,6 @@ function Round() {
     const [timer, seconds, resetTimer] = useTimer();
 
     useEffect(() => {
-        console.log("drawtarget: " + labels[currentRound])
         return () => clearInterval(timer);
     }, [currentRound, labels, timer]);
 
