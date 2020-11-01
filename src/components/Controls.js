@@ -42,7 +42,7 @@ function Controls() {
 
         nextRound();
         resetTimer();
-        navigate('game', {replace: true});
+        navigate('game');
     }
 
 

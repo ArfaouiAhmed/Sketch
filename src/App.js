@@ -4,7 +4,7 @@ import * as tf from "@tensorflow/tfjs";
 import {scoreReducer} from "./components/Score";
 import {Game} from "./components/Game";
 
-const model = tf.loadLayersModel("./model/model.json");
+const model = tf.loadLayersModel(process.env.PUBLIC_URL + "/model/model.json");
 const labels = require("./labels.json");
 let ref = React.createRef();
 
