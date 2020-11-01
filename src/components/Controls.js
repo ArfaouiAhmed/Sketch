@@ -1,8 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {getPrediction} from "../helpers";
 import {navigate} from '@reach/router'
 import {GameContext} from "../App";
-import {useTimer} from "./Timer";
 import {RoundContext} from "./Round";
 
 
@@ -22,16 +21,12 @@ const predictBtnStyle = {
 function Controls() {
     const {currentRound, setCurrentRound, score, dispatch, ref, model, labels} = useContext(GameContext);
     const [prediction, setPrediction] = useState(""); // Sets default label to empty string.
-    const { seconds, resetTimer} = useContext(RoundContext);
-
-    // useEffect(() => {
-    //     return () => clearInterval(timer);
-    // });
+    const {seconds, resetTimer} = useContext(RoundContext);
 
 
     function predict() {
+        console.log("Prediction: " + prediction);
         getPrediction(ref, model).then(prediction => {
-                console.log("Predicting...");
                 setPrediction(labels[prediction[0]]);
                 if (labels[prediction[0]] === labels[currentRound]) {
                     if (seconds < 10) {

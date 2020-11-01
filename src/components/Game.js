@@ -4,10 +4,9 @@ import FlexColumn from "./FlexColumn";
 import {Canvas} from "./Canvas";
 import GamingText from "./GamingText";
 import {getAppropriateText} from "./AppText";
-import {Controls} from "./Controls";
 import NesContainer from "./NesContainer";
 import React, {useContext} from "react";
-import {Round, RoundContext} from "./Round";
+import {Round} from "./Round";
 import {GameContext} from "../App";
 
 

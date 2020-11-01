@@ -1,5 +1,4 @@
-import React, {useEffect, useReducer, useState} from "react";
-import {Round} from "./components/Round";
+import React, {useReducer, useState} from "react";
 import {Result} from "./components/Result";
 import * as tf from "@tensorflow/tfjs";
 import {scoreReducer} from "./components/Score";
