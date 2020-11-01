@@ -19,7 +19,7 @@ const predictBtnStyle = {
 
 
 function Controls() {
-    const {currentRound, setCurrentRound, score, dispatch, ref, model, labels} = useContext(GameContext);
+    const {currentRound, nextRound, score, dispatch, ref, model, labels} = useContext(GameContext);
     const [prediction, setPrediction] = useState(""); // Sets default label to empty string.
     const {seconds, resetTimer} = useContext(RoundContext);
 
@@ -40,7 +40,7 @@ function Controls() {
             }
         )
 
-        setCurrentRound(currentRound + 1);
+        nextRound();
         resetTimer();
         navigate('game', {replace: true});
     }

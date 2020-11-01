@@ -25,7 +25,7 @@ const resultContainer = {
 
 
 function Result() {
-    const { setCurrentRound ,score ,dispatch} = useContext(GameContext);
+    const { resetRounds ,score ,dispatch} = useContext(GameContext);
 
 
 
@@ -53,7 +53,7 @@ function Result() {
                                 className="nes-btn is-warning"
                                 style={tryBtnStyle}
                                 onClick={() => {
-                                    setCurrentRound(0);
+                                    resetRounds();
                                     dispatch({type: "reset"});
                                 }}>
                                 Try Again.
