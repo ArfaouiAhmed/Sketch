@@ -1,6 +1,6 @@
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
-import GamingText from "./GamingText";
+import {TypedText} from "./TypedText";
 import NesContainer from "./NesContainer";
 import {getAppropriateText} from "./AppText";
 import React, {useContext} from "react";
@@ -25,7 +25,7 @@ const resultContainer = {
 
 
 function Result() {
-    const { resetRounds ,score ,dispatch} = useContext(GameContext);
+    const { resetRounds ,score ,dispatch, resetGamingText} = useContext(GameContext);
     let resultText = score > 8 ?  "gameEndSuccess" :  "gameEndFailure";
     let finalText = getAppropriateText(resultText).replace("scoreValue", score);
 
@@ -33,7 +33,7 @@ function Result() {
         <NesContainer style={resultContainer} title={"Sketch!"} dark >
             <FlexRow>
                 <FlexColumn>
-                    <GamingText strings={[finalText]}/>
+                    <TypedText text={finalText}/>
                 </FlexColumn>
                 <FlexColumn>
                     <FlexRow>
@@ -53,6 +53,7 @@ function Result() {
                                 style={tryBtnStyle}
                                 onClick={() => {
                                     resetRounds();
+                                    resetGamingText();
                                     dispatch({type: "reset"});
                                 }}>
                                 Try Again.

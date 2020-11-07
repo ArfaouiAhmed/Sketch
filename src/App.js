@@ -15,10 +15,16 @@ function useRounds(labels) {
     return [currentRound, setCurrentRound, () => setCurrentRound(currentRound + 1), () => setCurrentRound(0)];
 }
 
+function useGamingText(){
+    const [gtext, setGtext] = useState("gameStart");
+    return [gtext,() => setGtext("gameFailure"),() => setGtext("gameSuccess"),() => setGtext("gameStart")]
+}
+
 function App() {
 
     const [currentRound, setCurrentRound, nextRound, resetRounds] = useRounds();
     const [score, dispatch] = useReducer(scoreReducer, 0);
+    const [gamingtext, failureText, sucessText, resetGamingText] = useGamingText();
 
     return (
         <GameContext.Provider value={{
@@ -30,7 +36,11 @@ function App() {
             dispatch: dispatch,
             ref: ref,
             model: model,
-            labels: labels
+            labels: labels,
+            gamingtext: gamingtext,
+            failureText: failureText,
+            sucessText: sucessText,
+            resetGamingText: resetGamingText
         }}>
             {currentRound > 9 ? <Result/> : <Game/>}
         </GameContext.Provider>

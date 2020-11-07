@@ -3,7 +3,7 @@ import FlexColumn from "./FlexColumn";
 import NesContainer from "./NesContainer";
 import {getAppropriateText} from "./AppText";
 import React from "react";
-import GamingText from "./GamingText";
+import {TypedText} from "./TypedText";
 import { Link } from "react-router-dom";
 
 
@@ -15,7 +15,7 @@ function Home() {
             <FlexColumn>
                 <h1>Sketch!</h1>
                     <FlexRow>
-                        <GamingText strings={[getAppropriateText("welcome")]}/>
+                        <TypedText text={getAppropriateText("welcome")}/>
                     </FlexRow>
                     <FlexRow>
                         &nbsp;

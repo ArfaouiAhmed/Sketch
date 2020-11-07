@@ -2,12 +2,12 @@ import {Link} from "react-router-dom";
 import FlexRow from "./FlexRow";
 import FlexColumn from "./FlexColumn";
 import {Canvas} from "./Canvas";
-import GamingText from "./GamingText";
 import {getAppropriateText} from "./AppText";
 import NesContainer from "./NesContainer";
 import React, {useContext} from "react";
 import {Round} from "./Round";
 import {GameContext} from "../App";
+import {TypedText} from "./TypedText";
 
 
 const homeBtnStyle = {
@@ -17,7 +17,7 @@ const homeBtnStyle = {
 };
 
 function Game() {
-    const {currentRound, ref, labels} = useContext(GameContext);
+    const {currentRound, ref, labels, gamingtext} = useContext(GameContext);
 
     return(
         <NesContainer title={"Sketch! - Round " + (currentRound + 1) + " of " + labels.length} dark>
@@ -36,7 +36,7 @@ function Game() {
                 </FlexColumn>
                 <FlexColumn>
                     <FlexRow>
-                        <GamingText strings={[getAppropriateText("gameFailure")]}/>
+                        <TypedText text={getAppropriateText(gamingtext)} />
                     </FlexRow>
                     <FlexRow>
 
