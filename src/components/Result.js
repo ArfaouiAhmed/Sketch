@@ -26,15 +26,14 @@ const resultContainer = {
 
 function Result() {
     const { resetRounds ,score ,dispatch} = useContext(GameContext);
-
-
+    let resultText = score > 8 ?  "gameEndSuccess" :  "gameEndFailure";
+    let finalText = getAppropriateText(resultText).replace("scoreValue", score);
 
     return (
         <NesContainer style={resultContainer} title={"Sketch!"} dark >
             <FlexRow>
                 <FlexColumn>
-                    you scored : {score}
-                    <GamingText strings={[getAppropriateText("gameEndFailure")]}/>
+                    <GamingText strings={[finalText]}/>
                 </FlexColumn>
                 <FlexColumn>
                     <FlexRow>

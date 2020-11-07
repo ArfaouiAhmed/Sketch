@@ -22,11 +22,11 @@ const AppTexts =[
     },
     {
         status: "gameEndSuccess",
-        text: "Very Good, you scores 2 points."
+        text: "Very Good, you scores scoreValue points."
     },
     {
         status: "gameEndFailure",
-        text: "Womp,womp... Try harder next time,and\nmaybe you'll score more"
+        text: "Womp,womp... Try harder next time,and\nmaybe you'll score more than scoreValue points. "
     },
     {
         status: "welcome",
